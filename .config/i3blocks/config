@@ -1,0 +1,164 @@
+# i3blocks config file
+#
+# Please see man i3blocks for a complete reference!
+# The man page is also hosted at http://vivien.github.io/i3blocks
+#
+# List of valid properties:
+#
+# align
+# color
+# command
+# full_text
+# instance
+# interval
+# label
+# min_width
+# name
+# separator
+# separator_block_width
+# short_text
+# signal
+# urgent
+
+# Global properties
+#
+# Th etop properties below are applied to every block, but can be overridden.
+# Each block command defaults to the script name to avoid boilerplate.
+command=~/.local/share/i3blocks/library/$BLOCK_NAME/$BLOCK_NAME
+separator_block_width=15
+markup=none
+
+[timer_and_stopwatch]
+format=json
+interval=1
+TIMER_LABEL=
+STOPWATCH_LABEL=
+DEFAULT_MODE=stopwatch
+DEFAULT_STOPWATCH=0
+#DEFAULT_TIMER=60
+PLAY_LABEL=
+PAUSE_LABEL=
+#TIMER_LOOP=true
+
+[dotfiles]
+command=git --git-dir=$HOME/.local/share/dotfiles/ --work-tree=$HOME diff --numstat | wc -l
+interval=600
+label=
+signal=7
+
+[docker]
+command=docker ps -q | wc -l
+interval=60
+label=
+
+[brightness]
+command=echo "$(cat /sys/class/backlight/intel_backlight/brightness) * 100 / $(cat /sys/class/backlight/intel_backlight/max_brightness)" | bc
+label=
+interval=once
+signal=9
+
+#packages
+[packages]
+label=
+command=/usr/bin/checkupdates | wc -l
+interval=3600
+signal=8
+
+# Temperature
+#
+# Support multiple chips, though lm-sensors.
+# The script may be called with -w and -c switches to specify thresholds,
+# see the script for details.
+[temperature]
+label=
+interval=10
+
+[volume]
+label=
+#label=♪
+instance=Master
+interval=once
+signal=1
+
+# Memory usage
+#
+# The type defaults to "mem" if the instance is not specified.
+[memory]
+label=
+separator=false
+interval=30
+
+[memory]
+label=
+instance=swap
+separator=false
+interval=30
+
+# Disk usage
+#
+# The directory defaults to $HOME if the instance is not specified.
+# The script may be called with a optional argument to set the alert
+# (defaults to 10 for 10%).
+[disk]
+label=
+#instance=/mnt/data
+instance=/
+interval=30
+
+[disk]
+label=
+instance=/home
+interval=30
+# Network interface monitoring
+#
+# If the instance is not specified, use the interface used for default route.
+# The address can be forced to IPv4 or IPv6 with -4 or -6 switches.
+[publicip]
+command=echo $(curl ipecho.net/plain)
+label=
+interval=600
+
+[iface]
+label=
+color=#00FF00
+interval=10
+separator=false
+
+[wifi]
+command=export INTERFACE=$(nmcli device | grep -Po '[a-z0-9]+(?= +wifi)' | head -1); ~/.local/share/i3blocks/library/$BLOCK_NAME/$BLOCK_NAME
+label=
+interval=10
+separator=false
+
+[bandwidth]
+label=
+#instance=wlp3s0
+interval=5
+
+# CPU usage
+#
+# The script may be called with -w and -c switches to specify thresholds,
+# see the script for details.
+[cpu_usage]
+label=
+interval=10
+#min_width=CPU: 100.00%
+#separator=false
+
+#[load_average]
+#interval=10
+
+# Battery indicator
+#
+# The battery instance defaults to 0.
+[battery]
+label=
+#label=⚡
+instance=0
+interval=30
+
+# Date Time
+#
+[time]
+command=date '+%Y-%m-%d %H:%M:%S'
+interval=5

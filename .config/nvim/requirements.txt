@@ -1,0 +1,4 @@
+neovim
+pylint
+flake8
+yamllint

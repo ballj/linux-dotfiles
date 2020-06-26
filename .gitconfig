@@ -1,0 +1,10 @@
+[user]
+	name = Joseph Ball
+	email = joseph.ball@packetsolutions.io
+	signingkey = 3A3F56EE2FE1733D1BF1447873752419AC03F652
+[push]
+	default = upstream
+[commit]
+	gpgsign = true
+[pull]
+	ff = only
