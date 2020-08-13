@@ -72,6 +72,7 @@ signal=8
 [temperature]
 label=
 interval=10
+SENSOR_CHIP="$(sensors | grep -E '(k10temp-pci-00c3|coretemp-isa-0000)')"
 
 [volume]
 label=
